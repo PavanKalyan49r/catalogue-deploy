@@ -27,11 +27,12 @@ pipeline {
                 """
             }
         }
+
         stage('init') {
             steps{
                 sh """
                    cd terraform
-                   terraform init --backend-congif=${params.environment}/backend.tf -reconfigure
+                   terraform init -backend-congif=${params.environment}/backend.tf -reconfigure
                 """
             }
         }
