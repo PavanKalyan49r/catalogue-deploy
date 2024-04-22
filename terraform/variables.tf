@@ -24,6 +24,6 @@ variable "zone_name" {
   default = "pavanaws.online"
 }
 
-variable app_varsion {
+variable app_version {
   
 }
