@@ -15,7 +15,7 @@ pipeline {
     }
     parameters {
         string(name: 'version', defaultValue: '', description: 'what is the artifact version?')
-        string(name: 'environment', defaultValue: '', description: 'what is the environment?')
+        string(name: 'environment', defaultValue: 'dev', description: 'what is the environment?')
     }
 // build
     stages {
@@ -32,7 +32,15 @@ pipeline {
             steps{
                 sh """
                    cd terraform
-                   terraform init -backend-congif=${params.environment}/backend.tf -reconfigure
+                   terraform init --backend-congif=${params.environment}/backend.tf -reconfigure
+                """
+            }
+        }
+         stage('plan') {
+            steps{
+                sh """
+                   cd terraform
+                   terraform plan -var-file=${params.environment}/${params.environment}.tfvars
                 """
             }
         }
