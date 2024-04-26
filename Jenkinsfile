@@ -28,32 +28,32 @@ pipeline {
             }
         }
 
-        // stage('init') {
-        //     steps{
-        //         sh """
-        //            cd terraform
-        //            terraform init --backend-config=${params.environment}/backend.tf -reconfigure
-        //         """
-        //     }
-        // }
+        stage('init') {
+            steps{
+                sh """
+                   cd terraform
+                   terraform init --backend-config=${params.environment}/backend.tf -reconfigure
+                """
+            }
+        }
 
-        // stage('plan') {
-        //     steps{
-        //         sh """
-        //            cd terraform
-        //            terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
-        //         """
-        //     }
-        // }
+        stage('plan') {
+            steps{
+                sh """
+                   cd terraform
+                   terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+                """
+            }
+        }
 
-        // stage('apply') {
-        //     steps{
-        //         sh """
-        //            cd terraform
-        //            terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-        //         """
-        //     }
-        // }
+        stage('apply') {
+            steps{
+                sh """
+                   cd terraform
+                   terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+                """
+            }
+        }
     }
     //post build
     post {
